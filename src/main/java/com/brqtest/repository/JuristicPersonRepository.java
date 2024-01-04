@@ -1,4 +1,4 @@
-package com.example.brqtest.repository;
+package com.brqtest.repository;
 
 public interface JuristicPersonRepository {
 }

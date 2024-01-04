@@ -1,6 +1,6 @@
-package com.example.brqtest.controller;
+package com.brqtest.controller;
 
-import com.example.brqtest.service.AccountService;
+import com.brqtest.service.AccountService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

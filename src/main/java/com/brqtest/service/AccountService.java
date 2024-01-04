@@ -1,6 +1,6 @@
-package com.example.brqtest.service;
+package com.brqtest.service;
 
-import com.example.brqtest.repository.AccountRepository;
+import com.brqtest.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

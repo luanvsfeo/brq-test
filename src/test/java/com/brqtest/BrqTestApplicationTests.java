@@ -1,4 +1,4 @@
-package com.example.brqtest;
+package com.brqtest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

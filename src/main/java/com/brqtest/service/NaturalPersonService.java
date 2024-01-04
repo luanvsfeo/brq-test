@@ -1,6 +1,6 @@
-package com.example.brqtest.service;
+package com.brqtest.service;
 
-import com.example.brqtest.repository.NaturalPersonRepository;
+import com.brqtest.repository.NaturalPersonRepository;
 import org.springframework.stereotype.Service;
 
 @Service

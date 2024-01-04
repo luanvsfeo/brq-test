@@ -1,4 +1,4 @@
-package com.example.brqtest.model;
+package com.brqtest.model;
 
 public class NaturalPerson {
 
