@@ -9,11 +9,9 @@ public class AccountService {
 
     //todo - colocar log e os metodos ne
 
-    private final AccountRepository accountRepository;
+  //  private final AccountRepository accountRepository;
 
-    public AccountService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+
 
     public void create(){
 

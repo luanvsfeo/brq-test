@@ -8,11 +8,8 @@ public class JuristicPersonService {
 
     //todo - colocar log e os metodos ne
 
-    private final JuristicPersonRepository juristicPersonRepository;
+    //private final JuristicPersonRepository juristicPersonRepository;
 
-    public JuristicPersonService(JuristicPersonRepository juristicPersonRepository) {
-        this.juristicPersonRepository = juristicPersonRepository;
-    }
 
 
     public void create() {
