@@ -1,4 +1,4 @@
-package com.brqtest.utils;
+package com.brqtest.enuns;
 
 public enum Status {
     ACTIVE,

@@ -21,8 +21,6 @@ public class AccountService {
     public void transfer(){
         // colocar a parte de comunicacao com a api externa
 
-
-
         /*
         receber o numero da conta da pessoa logada, ja que ele pode ter mais de uma
         buscar no banco a conta da pessoa que vai receber a quantia

@@ -11,11 +11,8 @@ public class OpenApiConfig {
     public OpenAPI openAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Title - Rest API")
-                        .description("API exemplo de uso de Springboot REST API")
-                        .version("1.0")
-                        .termsOfService("Termo de uso: Open Source")
-
+                        .title("Bank - Rest API")
+                        .description("API for test my knowledgment ")
                 );
     }
 }
