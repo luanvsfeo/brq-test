@@ -6,14 +6,12 @@ import com.brqtest.service.NaturalPersonService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.invoke.MethodHandles;
 
-@RestController
+@Controller
 @RequestMapping("/natural-person")
 public class NaturalPersonController {
 
@@ -26,7 +24,7 @@ public class NaturalPersonController {
     }
 
     @PostMapping
-    public NaturalPersonDto create(@RequestBody @Valid NaturalPersonDto naturalPersonDto) {
+    public NaturalPersonDto create(@Valid @RequestBody NaturalPersonDto naturalPersonDto) {
         log.info("m=create; step=start");
         NaturalPersonDto naturalPersonDtoCreated = naturalPersonService.create(naturalPersonDto);
         log.info("m=create; step=finished; {}", naturalPersonDtoCreated);
