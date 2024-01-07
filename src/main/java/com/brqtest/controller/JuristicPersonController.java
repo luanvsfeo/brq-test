@@ -6,9 +6,7 @@ import com.brqtest.service.JuristicPersonService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.invoke.MethodHandles;
 
@@ -25,7 +23,7 @@ public class JuristicPersonController {
     }
 
     @PostMapping
-    public JuristicPersonDto create(@Valid JuristicPersonDto juristicPersonDto) {
+    public JuristicPersonDto create(@Valid @RequestBody JuristicPersonDto juristicPersonDto) {
         log.info("m=create; step=start");
         JuristicPersonDto juristicPersonCreated = juristicPersonService.create(juristicPersonDto);
         log.info("m=create; step=finished; {}", juristicPersonCreated);

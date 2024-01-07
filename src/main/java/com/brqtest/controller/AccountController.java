@@ -1,10 +1,7 @@
 package com.brqtest.controller;
 
 import com.brqtest.service.AccountService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/account")
@@ -18,9 +15,9 @@ public class AccountController {
 
     // todo - fazer o dto
 
-    @PostMapping
-    public void create() {
-        accountService.create();
+    @PostMapping("/person/{person_id}")
+    public void create(@RequestParam("person_id") long personId) {
+        accountService.create(personId);
     }
 
     @GetMapping("/statement")

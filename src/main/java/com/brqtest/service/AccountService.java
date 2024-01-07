@@ -1,5 +1,7 @@
 package com.brqtest.service;
 
+import com.brqtest.enuns.Status;
+import com.brqtest.model.dto.AccountDto;
 import com.brqtest.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,12 +11,23 @@ public class AccountService {
 
     //todo - colocar log e os metodos ne
 
-  //  private final AccountRepository accountRepository;
+  private final AccountRepository accountRepository;
+
+    public AccountService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
 
+    public AccountDto create(Long personId){
 
-    public void create(){
+        AccountDto accountDto = AccountDto.builder()
+                .agency(0l)
+                .balance(1l)
+                .number(0l)
+                .status(Status.ACTIVE)
+                .build();
 
+        return accountRepository.save(accountDto.convertToEntity()).convertToDto();
     }
 
     @Transactional

@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.br.CPF;
 @Builder
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class NaturalPersonDto {
 
-    @CPF
     @NotNull(message = "cpf is a required field")
     private Long cpf;
 

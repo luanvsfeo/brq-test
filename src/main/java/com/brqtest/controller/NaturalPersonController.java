@@ -26,7 +26,7 @@ public class NaturalPersonController {
     }
 
     @PostMapping
-    public NaturalPersonDto create(@RequestBody @Valid NaturalPersonDto naturalPersonDto) {
+    public NaturalPersonDto create(@Valid @RequestBody NaturalPersonDto naturalPersonDto) {
         log.info("m=create; step=start");
         NaturalPersonDto naturalPersonDtoCreated = naturalPersonService.create(naturalPersonDto);
         log.info("m=create; step=finished; {}", naturalPersonDtoCreated);

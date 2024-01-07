@@ -12,7 +12,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(new Info()
                         .title("Bank - Rest API")
-                        .description("API for test my knowledgment ")
+                        .description("API for test my knowledgment")
                 );
     }
 }
