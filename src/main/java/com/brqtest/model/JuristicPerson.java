@@ -5,6 +5,8 @@ import com.brqtest.model.dto.JuristicPersonDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Builder
 @Getter
 @Setter
@@ -30,7 +32,8 @@ public class JuristicPerson {
     @Column(nullable = false)
     private String password;
 
-    // colcoar aqui uma lista de contas
+    @OneToMany(mappedBy="juristicPerson")
+    private List<Account> accounts;
 
     public JuristicPersonDto convertToDto() {
         return JuristicPersonDto.builder()

@@ -4,6 +4,8 @@ import com.brqtest.model.dto.NaturalPersonDto;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Builder
 @Getter
 @Setter
@@ -29,7 +31,8 @@ public class NaturalPerson {
     @Column(nullable = false)
     private String password;
 
-    // colcoar aqui uma lista de contas
+    @OneToMany(mappedBy="naturalPerson")
+    private List<Account> accounts;
 
     public NaturalPersonDto convertToDto() {
         return NaturalPersonDto.builder()

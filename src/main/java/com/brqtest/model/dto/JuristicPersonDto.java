@@ -9,12 +9,11 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 @Builder
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class JuristicPersonDto {
 
-    @CNPJ
+    @NotNull(message = "cnpj is a required field")
     private Long cnpj;
 
     @NotNull(message = "name is a required field")
@@ -24,7 +23,6 @@ public class JuristicPersonDto {
     private String address;
 
     @NotNull(message = "password is a required field")
-    @JsonIgnore
     private String password;
 
     public JuristicPerson convertToEntity() {
