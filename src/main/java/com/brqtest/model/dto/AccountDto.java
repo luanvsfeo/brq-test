@@ -2,6 +2,7 @@ package com.brqtest.model.dto;
 
 import com.brqtest.enuns.Status;
 import com.brqtest.model.Account;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountDto {
 
+    @NotNull
     private Long number;
+    @NotNull
     private Long agency;
     private double balance;
     private Status status;

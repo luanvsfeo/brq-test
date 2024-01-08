@@ -1,9 +1,13 @@
 package com.brqtest.service;
 
 import com.brqtest.enuns.Status;
+import com.brqtest.model.Account;
 import com.brqtest.model.dto.AccountDto;
+import com.brqtest.model.dto.TransferRequestDto;
 import com.brqtest.repository.AccountRepository;
+import com.brqtest.utils.StaticUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.IllegalTransactionStateException;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -22,27 +26,31 @@ public class AccountService {
 
         AccountDto accountDto = AccountDto.builder()
                 .agency(0l)
-                .balance(1l)
                 .number(0l)
+                .balance(0.0)
                 .status(Status.ACTIVE)
                 .build();
+
+        // antes de criar ver se ja existe a conta e nao deixar criar
 
         return accountRepository.save(accountDto.convertToEntity()).convertToDto();
     }
 
     @Transactional
-    public void transfer(){
-        // colocar a parte de comunicacao com a api externa
+    public Boolean transfer(TransferRequestDto transferRequestDto){
 
-        /*
-        receber o numero da conta da pessoa logada, ja que ele pode ter mais de uma
-        buscar no banco a conta da pessoa que vai receber a quantia
-        verificar se a conta que esta enviando o dinheiro tem o saldo necessario, se nao jogar mensagem de 400
-         */
+        Account sending  = accountRepository.findOneByNumberAndAgency(transferRequestDto.getSending().getNumber(), transferRequestDto.getSending().getAgency());
+        Account receiving  = accountRepository.findOneByNumberAndAgency(transferRequestDto.getReceiving().getNumber(), transferRequestDto.getReceiving().getAgency());
+
+        if(sending.getBalance() < transferRequestDto.getAmount()){
+            throw new IllegalTransactionStateException("Usuario nao possui o valor da transferencia em conta");
+        }else{
+            StaticUtils.changeBalance(receiving,sending, transferRequestDto.getAmount());
+
+            accountRepository.save(receiving);
+            accountRepository.save(sending);
+
+            return true;
+        }
     }
-
-    public void statement(){
-
-    }
-
 }
