@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface AccountRepository extends JpaRepository<Account,Long> {
 
     Account findOneByNumberAndAgency(Long number,Long agency);
+
+    boolean existsByAgency (Long agency);
+
+    boolean existsByNumber (Long number);
 }

@@ -1,5 +1,6 @@
 package com.brqtest.service;
 
+import com.brqtest.model.JuristicPerson;
 import com.brqtest.model.dto.JuristicPersonDto;
 import com.brqtest.repository.JuristicPersonRepository;
 import com.brqtest.utils.StaticUtils;
@@ -8,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import java.lang.invoke.MethodHandles;
 import java.security.InvalidParameterException;
+import java.util.Optional;
 
 @Service
 public class JuristicPersonService {
@@ -35,5 +37,9 @@ public class JuristicPersonService {
         } else {
             throw new InvalidParameterException("Cnpj invalido");
         }
+    }
+
+    public Optional<JuristicPerson> findByCnpj(Long cnpj) {
+        return juristicPersonRepository.findOneByCnpj(cnpj);
     }
 }

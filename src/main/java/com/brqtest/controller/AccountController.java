@@ -1,5 +1,6 @@
 package com.brqtest.controller;
 
+import com.brqtest.model.dto.AccountDto;
 import com.brqtest.model.dto.TransferRequestDto;
 import com.brqtest.service.AccountService;
 import jakarta.validation.Valid;
@@ -15,16 +16,14 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    // todo - fazer o dto
-
-    @PostMapping("/person/{person_id}")
-    public void create(@RequestParam("person_id") long personId) {
-        accountService.create(personId);
+    @PostMapping("/person/{person_document}")
+    public AccountDto create(@RequestParam("person_document") long personDocument) {
+        return accountService.create(personDocument);
     }
 
-     @PostMapping("/transfer")
-    public void makeBankTransfer(@Valid @RequestBody TransferRequestDto transferRequestDto) {
-        accountService.transfer(transferRequestDto);
+    @PostMapping("/transfer")
+    public Boolean makeBankTransfer(@Valid @RequestBody TransferRequestDto transferRequestDto) {
+        return accountService.transfer(transferRequestDto);
     }
 
 }

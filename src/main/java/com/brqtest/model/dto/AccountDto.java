@@ -22,6 +22,11 @@ public class AccountDto {
     private Status status;
 
     public Account convertToEntity() {
-        return Account.builder().build();
+        return Account.builder()
+                .agency(this.agency)
+                .number(this.number)
+                .balance(this.balance)
+                .status(this.status)
+                .build();
     }
 }
