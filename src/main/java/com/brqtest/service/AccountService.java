@@ -38,7 +38,7 @@ public class AccountService {
         AccountDto accountDto = AccountDto.builder()
                 .agency(generateAgency())
                 .number(generateNumber())
-                .balance(0.0)
+                .balance(10.0)
                 .status(Status.ACTIVE)
                 .build();
 
@@ -58,8 +58,8 @@ public class AccountService {
     @Transactional
     public Boolean transfer(TransferRequestDto transferRequestDto) {
 
-        Account sending = accountRepository.findOneByNumberAndAgency(transferRequestDto.getSending().getNumber(), transferRequestDto.getSending().getAgency());
-        Account receiving = accountRepository.findOneByNumberAndAgency(transferRequestDto.getReceiving().getNumber(), transferRequestDto.getReceiving().getAgency());
+        Account sending = accountRepository.findByNumberAndAgency(transferRequestDto.getSending().getNumber(), transferRequestDto.getSending().getAgency());
+        Account receiving = accountRepository.findByNumberAndAgency(transferRequestDto.getReceiving().getNumber(), transferRequestDto.getReceiving().getAgency());
 
         if (sending.getBalance() < transferRequestDto.getAmount()) {
             throw new IllegalTransactionStateException("Usuario nao possui o valor da transferencia em conta");

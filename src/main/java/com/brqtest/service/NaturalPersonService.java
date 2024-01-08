@@ -23,18 +23,16 @@ public class NaturalPersonService {
         this.naturalPersonRepository = naturalPersonRepository;
     }
 
-    public Optional<NaturalPerson> findByCpf(Long cpf) {
-        return naturalPersonRepository.findOneByCpf(cpf);
-    }
-
     public NaturalPersonDto create(NaturalPersonDto naturalPersonDto) {
         log.info("m=create; step=start");
 
         if (StaticUtils.isCpf(naturalPersonDto.getCpf().toString())) {
             try {
-                NaturalPersonDto naturalPersonDtoCreated = naturalPersonRepository.save(naturalPersonDto.convertToEntity()).convertToDto();
-                log.info("m=create; step=finished; {}", naturalPersonDtoCreated);
-                return naturalPersonDtoCreated;
+                NaturalPerson naturalPerson = naturalPersonDto.convertToEntity();
+                naturalPerson.hashPassword();
+                naturalPerson = naturalPersonRepository.save(naturalPerson);
+                log.info("m=create; step=finished; {}", naturalPerson);
+                return naturalPerson.convertToDtoWithoutPassword();
             } catch (RuntimeException e) {
                 log.warn("m=create; e=" + e.getMessage(), e);
                 return null;
@@ -43,5 +41,9 @@ public class NaturalPersonService {
             throw new InvalidParameterException("Cpf invalido");
 
         }
+    }
+
+    public Optional<NaturalPerson> findByCpf(Long cpf) {
+        return naturalPersonRepository.findOneByCpf(cpf);
     }
 }

@@ -2,6 +2,7 @@ package com.brqtest.model;
 
 
 import com.brqtest.model.dto.JuristicPersonDto;
+import com.brqtest.utils.StaticUtils;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Data
 public class JuristicPerson {
 
     @Id
@@ -41,6 +43,18 @@ public class JuristicPerson {
                 .cnpj(this.cnpj)
                 .name(this.name)
                 .build();
+    }
+
+    public JuristicPersonDto convertToDtoWithoutPassword() {
+        return JuristicPersonDto.builder()
+                .address(this.address)
+                .cnpj(this.cnpj)
+                .name(this.name)
+                .build();
+    }
+
+    public void hashPassword(){
+        this.setPassword(StaticUtils.hashingPassword(this.password));
     }
 
 }

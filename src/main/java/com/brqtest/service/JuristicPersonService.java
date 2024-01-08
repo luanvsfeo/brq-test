@@ -7,6 +7,7 @@ import com.brqtest.utils.StaticUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import java.lang.invoke.MethodHandles;
 import java.security.InvalidParameterException;
 import java.util.Optional;
@@ -27,9 +28,12 @@ public class JuristicPersonService {
 
         if (StaticUtils.isCnpj(juristicPersonDto.getCnpj().toString())) {
             try {
-                JuristicPersonDto juristicPersonDtoCreated = juristicPersonRepository.save(juristicPersonDto.convertToEntity()).convertToDto();
-                log.info("m=create; step=finished; {}", juristicPersonDtoCreated);
-                return juristicPersonDtoCreated;
+                JuristicPerson juristicPerson = juristicPersonDto.convertToEntity();
+                juristicPerson.hashPassword();
+                juristicPerson = juristicPersonRepository.save(juristicPerson);
+                log.info("m=create; step=finished; {}", juristicPerson);
+
+                return juristicPerson.convertToDtoWithoutPassword();
             } catch (RuntimeException e) {
                 log.warn("m=create; e=" + e.getMessage(), e);
                 return null;
