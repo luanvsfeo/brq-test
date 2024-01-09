@@ -51,14 +51,14 @@ POST | /account/transfer
 ```
 {
   "sending": {
-    "number": 0,
-    "agency": 0
+    "number": 9860545,
+    "agency": 6984
   },
   "receiving": {
-    "number": 0,
-    "agency": 0
+    "number": 6996812,
+    "agency": 6811
   },
-  "amount": 0
+  "amount": 10
 }
 ```
 ### Criacao de conta
