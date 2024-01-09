@@ -46,8 +46,6 @@ public class AccountService {
 
         log.info("m=create; step=start");
 
-        // colocar log aqui
-
         AccountDto accountDto = AccountDto.builder()
                 .agency(generateAgency())
                 .number(generateNumber())
@@ -65,14 +63,17 @@ public class AccountService {
             juristicPerson.ifPresent(account::setJuristicPerson);
         }
 
-        return accountRepository.save(account).convertToDto();
+        account = accountRepository.save(account);
+        log.info("m=create; step=finished; {}", account);
+
+        return account.convertToDto();
     }
 
     public Boolean deposit(DepositRequest depositRequest) {
 
-        Account account = accountRepository.findByNumberAndAgency(depositRequest.getAccountDto().getNumber(),depositRequest.getAccountDto().getAgency());
+        Account account = accountRepository.findByNumberAndAgency(depositRequest.getAccountDto().getNumber(), depositRequest.getAccountDto().getAgency());
 
-        if (account != null){
+        if (account != null) {
             account.growBalance(depositRequest.getAmount());
             accountRepository.save(account);
             sendNotification();
@@ -99,21 +100,20 @@ public class AccountService {
             accountRepository.save(sending);
 
             log.info("m=transfer; step=finished; receiving={}; sending={}", receiving, sending);
-            sendNotification();
 
             return true;
         }
     }
 
 
-    private void sendNotification(){
-        try{
+    private void sendNotification() {
+        try {
             ResponseEntity<String> response = restTemplate.getForEntity(PATH_NOTIFICATION_SERVICE, String.class);
 
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(response.getBody());
 
-        }catch (Exception e){
+        } catch (Exception e) {
             log.warn("Ocorreu um erro ao enviar a notificacao");
         }
     }
