@@ -1,6 +1,10 @@
 package com.brqtest.controller;
 
+import com.brqtest.model.dto.AccountDto;
+import com.brqtest.model.request.DepositRequest;
+import com.brqtest.model.request.TransferRequest;
 import com.brqtest.service.AccountService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,21 +17,19 @@ public class AccountController {
         this.accountService = accountService;
     }
 
-    // todo - fazer o dto
-
-    @PostMapping("/person/{person_id}")
-    public void create(@RequestParam("person_id") long personId) {
-        accountService.create(personId);
-    }
-
-    @GetMapping("/statement")
-    public void getBankStatement() {
-        accountService.statement();
+    @PostMapping("/person/{person_document}")
+    public AccountDto create(@RequestParam("person_document") long personDocument) {
+        return accountService.create(personDocument);
     }
 
     @PostMapping("/transfer")
-    public void makeBankTransfer() {
-        accountService.transfer();
+    public Boolean makeBankTransfer(@Valid @RequestBody TransferRequest transferRequest) {
+        return accountService.transfer(transferRequest);
+    }
+
+    @PostMapping("/deposit")
+    public Boolean makeDeposit(@Valid @RequestBody DepositRequest depositRequest) {
+        return accountService.deposit(depositRequest);
     }
 
 }

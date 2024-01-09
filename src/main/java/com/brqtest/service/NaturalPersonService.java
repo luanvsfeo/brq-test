@@ -1,13 +1,16 @@
 package com.brqtest.service;
 
+import com.brqtest.model.NaturalPerson;
 import com.brqtest.model.dto.NaturalPersonDto;
 import com.brqtest.repository.NaturalPersonRepository;
 import com.brqtest.utils.StaticUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import java.lang.invoke.MethodHandles;
 import java.security.InvalidParameterException;
+import java.util.Optional;
 
 @Service
 public class NaturalPersonService {
@@ -25,9 +28,11 @@ public class NaturalPersonService {
 
         if (StaticUtils.isCpf(naturalPersonDto.getCpf().toString())) {
             try {
-                NaturalPersonDto naturalPersonDtoCreated = naturalPersonRepository.save(naturalPersonDto.convertToEntity()).convertToDto();
-                log.info("m=create; step=finished; {}", naturalPersonDtoCreated);
-                return naturalPersonDtoCreated;
+                NaturalPerson naturalPerson = naturalPersonDto.convertToEntity();
+                naturalPerson.hashPassword();
+                naturalPerson = naturalPersonRepository.save(naturalPerson);
+                log.info("m=create; step=finished; {}", naturalPerson);
+                return naturalPerson.convertToDtoWithoutPassword();
             } catch (RuntimeException e) {
                 log.warn("m=create; e=" + e.getMessage(), e);
                 return null;
@@ -36,5 +41,9 @@ public class NaturalPersonService {
             throw new InvalidParameterException("Cpf invalido");
 
         }
+    }
+
+    public Optional<NaturalPerson> findByCpf(Long cpf) {
+        return naturalPersonRepository.findOneByCpf(cpf);
     }
 }

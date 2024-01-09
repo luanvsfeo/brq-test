@@ -42,7 +42,15 @@ public class Account {
 
     public AccountDto convertToDto() {
         return AccountDto.builder()
+                .agency(this.agency)
+                .number(this.number)
+                .balance(this.balance)
                 .build();
+    }
+
+
+    public void growBalance(Double amount){
+        this.setBalance(this.getBalance() + amount);
     }
 
 }

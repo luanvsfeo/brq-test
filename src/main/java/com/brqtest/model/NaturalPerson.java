@@ -1,6 +1,7 @@
 package com.brqtest.model;
 
 import com.brqtest.model.dto.NaturalPersonDto;
+import com.brqtest.utils.StaticUtils;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,5 +42,17 @@ public class NaturalPerson {
                 .name(this.name)
                 .password(this.password)
                 .build();
+    }
+
+    public NaturalPersonDto convertToDtoWithoutPassword() {
+        return NaturalPersonDto.builder()
+                .address(this.address)
+                .cpf(this.cpf)
+                .name(this.name)
+                .build();
+    }
+
+    public void hashPassword(){
+        this.setPassword(StaticUtils.hashingPassword(this.password));
     }
 }
