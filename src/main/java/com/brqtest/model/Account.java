@@ -48,4 +48,9 @@ public class Account {
                 .build();
     }
 
+
+    public void growBalance(Double amount){
+        this.setBalance(this.getBalance() + amount);
+    }
+
 }

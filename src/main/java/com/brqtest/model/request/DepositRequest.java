@@ -1,18 +1,18 @@
-package com.brqtest.model.dto;
+package com.brqtest.model.request;
 
+import com.brqtest.model.dto.AccountDto;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
+@Getter
 @Data
 @AllArgsConstructor
-public class TransferRequestDto {
+public class DepositRequest {
 
     @NotNull
-    private AccountDto sending;
-
-    @NotNull
-    private AccountDto receiving;
+    private AccountDto accountDto;
 
     @NotNull
     private Double amount;
